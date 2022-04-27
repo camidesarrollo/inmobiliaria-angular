@@ -1,0 +1,23 @@
+<div class="cuerpo">
+    <main class="contenedor seccion contenido-centrado">
+        <h2 class="fw-300 centrar-texto">Iniciar Sesión</h2>
+    
+        <form class="login" #frmLogin="ngForm" (ngSubmit)="onLogin(frmLogin)">
+    
+            <label for="email">Email: </label>
+            <input type="text" name="email" id="email" placeholder="Tu email" ngModel required>
+            <i class="fa fa-user"></i>
+            <label for="pass">Password: </label>
+            <input type="password" name="password" id="pass" placeholder="Tu clave" ngModel required>
+            <i class="fa fa-key"></i>
+            <button class="boton boton-verde" type="submit">
+                <i class="spinner"></i>
+                <span class="state">Log in</span>
+            </button>
+            <div class="parent">
+                <a routerLink="/auth/register" class="link">¿No estas registrado?</a>
+                <a routerLink="/" class="link">Volver al inicio</a>
+            </div>
+        </form> 
+    </main>
+</div>

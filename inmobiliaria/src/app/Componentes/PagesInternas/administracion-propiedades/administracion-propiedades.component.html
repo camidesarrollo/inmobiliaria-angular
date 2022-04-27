@@ -1,0 +1,138 @@
+<section class="contenedor seccion">
+  <form class="contacto" #propiedadesForm="ngForm" (ngSubmit)="agregarPropiedades(propiedadesForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades._id">
+    <fieldset>
+      <legend>Información Propiedad</legend>
+      <label>
+        Nombre
+      </label>
+      <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.nombre">
+      <label>
+        Baño:
+        <input type="number" name="bano" #bano="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.bano">
+      </label>
+  
+      <label>
+        Pieza:
+        <input type="number" name="pieza" #pieza="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.pieza">
+      </label>
+  
+      <label>
+        Ubicacion:
+        <input type="text" name="ubicacion" #ubicacion="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.ubicacion">
+      </label>
+      
+      <label>
+        Direccion:
+        <input type="text" name="direccion" #direccion="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.direccion">
+      </label>
+      <label>
+        Metros cuadrados:
+        <input type="text" name="metrosCuadrados" #metrosCuadrados="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.metrosCuadrados">
+      </label>
+      <label>
+        Valor:
+        <input type="number" name="valor" #valor="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.valor">
+      </label>
+      
+      <label>
+        Descripcion:
+        <input type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.descripcion">
+      </label>
+      
+      <label>
+        Inmobiliaria:
+        <input type="text" name="inmobiliaria" #inmobiliaria="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.inmobiliaria">
+      </label>
+      <label>
+        tipo de recidencia:
+        <select name="recidencia" #recidencia="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.recidencia">
+          <option value="" disabled selected>-- Seleccione --</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+      </label>
+      <label>
+        tipo:
+        <select name="tipo" #tipo="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.tipo">
+          <option value="" disabled selected>-- Seleccione --</option>
+          <option value="Departamento">Departamento</option>
+          <option value="Casa">Casa</option>
+        </select>
+      </label>
+      
+      <label>
+        Venta:
+        <select name="venta" #venta="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.venta">
+          <option value="" disabled selected>-- Seleccione --</option>
+          <option value="Verde">Verde</option>
+          <option value="Inmediata">Inmediata</option>
+        </select>
+      </label>
+      
+      <label>
+        url de la imagen del plano:
+        <input type="text" name="urlPlano" #urlPlano="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.urlPlano">
+      </label>
+      
+      <label>
+        Url de la imagen de la propiedad:
+        <input type="text" name="urlPropiedad" #urlPropiedad="ngModel" [(ngModel)]="propiedadesService.selectedPropiedades.urlPropiedad">
+      </label>
+      <button class="boton boton-verde">Submit</button>
+    </fieldset>
+  </form>
+  <!-- FORM -->
+
+</section>
+<section class="seccion">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Baño</th>
+        <th>Pieza</th>
+        <th>Ubicación</th>
+        <th>Direccion</th>
+        <th>Valor</th>
+        <th>Metros cuadrados</th>
+        <th>Descripcion</th>
+        <th>Inmobiliaria</th>
+        <th>Recidencia</th>
+        <th>Tipo</th>
+        <th>Venta</th>
+        <th>Url plano</th>
+        <th>Url propiedad</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let propiedad of propiedadesService.propiedades">
+        <td>{{propiedad.nombre}}</td>
+        <td>{{propiedad.bano}}</td>
+        <td>{{propiedad.pieza}}</td>
+        <td>{{propiedad.ubicacion}}</td>
+        <td>{{propiedad.direccion}}</td>
+        <td>{{propiedad.valor}}</td>
+        <td>{{propiedad.metrosCuadrados}}</td>
+        <td>{{propiedad.descripcion}}</td>
+        <td>{{propiedad.inmobiliaria}}</td>
+        <td>{{propiedad.recidencia}}</td>
+        <td>{{propiedad.tipo}}</td>
+        <td>{{propiedad.venta}}</td>
+        <td>{{propiedad.urlPlano}}</td>
+        <td>{{propiedad.urlPropiedad}}</td>
+        <td>
+          <a class="btn btn-secondary btn-sm">
+            <i class="material-icons" (click)="editarPropiedad(propiedad)">edit</i>
+          </a>
+          <a class="btn btn-danger btn-sm">
+            <i class="material-icons" (click)="eliminarPropiedad(propiedad._id, propiedadesForm)">delete</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+   
+  

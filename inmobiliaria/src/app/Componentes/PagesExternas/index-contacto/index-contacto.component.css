@@ -1,0 +1,29 @@
+/** Contacto Home **/
+.imagen-contacto {
+    background-image: url(../../../../assets/Imagenes/encuentra.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 40rem;
+    display: flex;
+    align-items: center;
+}
+.contenido-contacto {
+    flex: 0 0 95%;
+    color: #ffffff;
+}
+.contenido-contacto p {
+    font-size: 1.8rem;
+}
+/** Sección Inferior **/
+@media (min-width: 768px) {
+    .seccion-inferior {
+        display: flex;
+        justify-content: space-between;
+    }
+    .seccion-inferior .blog {
+        flex-basis: 60%;
+    }
+    .seccion-inferior .testimoniales {
+        flex-basis: calc(40% - 2rem);
+    }
+}

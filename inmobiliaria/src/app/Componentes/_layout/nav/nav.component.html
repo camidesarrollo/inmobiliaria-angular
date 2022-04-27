@@ -1,0 +1,10 @@
+<nav id="navegacion" class="navegacion">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/nosotros">Nosotros</a>
+    <a routerLink="/anuncios">Anuncios</a>
+    <a routerLink="/blog">Blog</a>
+    <a routerLink="/contacto">Contacto</a>
+    <a routerLink="/auth/login" *ngIf="validador == false">Login</a>  
+    <a *ngIf="validador == true" routerLink="/administrar">Administrador</a>
+    <a (click)="cerrarSeccion()" style="cursor: pointer;" *ngIf="validador == true">Cerrar Sesion</a>  
+</nav>

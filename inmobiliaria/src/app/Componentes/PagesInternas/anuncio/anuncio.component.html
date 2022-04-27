@@ -1,0 +1,25 @@
+<div *ngFor="let propiedad of propiedadesService.propiedades">
+    <h1 class="fw-300 centrar-texto">{{propiedad.nombre}}</h1>
+    <img src="{{propiedad.urlPropiedad}}" alt="Imagen Anuncio" class="imgContenido">
+
+    <main class="contenedor seccion contenido-centrado">
+        <div class="resumen-propiedad">
+            <p class="precio">${{propiedad.valor}}</p>
+            <ul class="iconos-caracteristicas">
+                <li>
+                    <img src="../../../../assets/Imagenes/icono_wc.svg" alt="icono wc">
+                    <p>{{propiedad.bano}}</p>
+                </li>
+                <li>
+                    <img src="../../../../assets/Imagenes/icono_estacionamiento.svg" alt="icono autos">
+                    <p>3</p>
+                </li>
+                <li>
+                    <img src="../../../../assets/Imagenes/icono_dormitorio.svg" alt="icono habitaciones">
+                    <p>{{propiedad.pieza}}</p>
+                </li>
+            </ul>
+        </div><!--.resumen-propiedad-->
+        <p>{{propiedad.descripcion}}</p> 
+    </main>
+</div>

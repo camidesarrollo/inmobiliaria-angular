@@ -1,0 +1,20 @@
+<main class="contenedor seccion contenido-centrado">
+    <h2 class="fw-300 centrar-texto">Registrarse</h2>
+
+    <form class="Register" action="" #frmRegister="ngForm" (ngSubmit)="onRegister(frmRegister)">
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" ngModel required>
+        <i class="fa fa-user"></i>
+        <label for="email">Email: </label>
+        <input type="text" name="email" id="email" placeholder="Tu email" ngModel required>
+        <i class="fa fa-user"></i>
+        <label for="pass">Password: </label>
+        <input type="password" name="password" id="pass" placeholder="Tu clave" ngModel required>
+        <i class="fa fa-key"></i>
+        <button class="boton boton-verde" type="submit">
+            <i class="spinner"></i>
+            <span class="state">Registrarse</span>
+        </button>
+        <a routerLink="/auth/login">Ya tienes una cuenta!</a>
+    </form>
+</main>

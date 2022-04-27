@@ -1,0 +1,32 @@
+<main class="seccion contenedor">
+    <h2 class="fw-300 centrar-texto">Casas y Depas en Venta</h2>
+
+    <div class="contenedor-anuncios">
+        <div class="anuncio" *ngFor="let propiedad of propiedadesService.propiedades">
+            <img src="{{propiedad.urlPropiedad}}" alt="Anuncio casa en el lago">
+            <div class="contenido-anuncio">
+                <h3>{{propiedad.nombre}}</h3>
+                <p>{{propiedad.descripcion}}</p>
+                <p class="precio">${{propiedad.valor}}</p>
+
+                <ul class="iconos-caracteristicas">
+                    <li>
+                        <img src="../../../../assets/Imagenes/icono_wc.svg" alt="icono wc">
+                        <p>{{propiedad.bano}}</p>
+                    </li>
+                    <li>
+                        <img src="../../../../assets/Imagenes/icono_estacionamiento.svg" alt="icono autos">
+                        <p>3</p>
+                    </li>
+                    <li>
+                        <img src="../../../../assets/Imagenes/icono_dormitorio.svg" alt="icono habitaciones">
+                        <p>{{propiedad.pieza}}</p>
+                    </li>
+                </ul>
+
+
+                <a routerLink="/anuncio/{{propiedad._id}}" class="boton boton-amarillo d-block">Ver Propiedad</a>
+            </div>
+        </div>       
+    </div>
+</main>
