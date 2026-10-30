@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Contacto} from '../Model/contacto';
 
@@ -6,11 +6,13 @@ import {Contacto} from '../Model/contacto';
   providedIn: 'root'
 })
 export class ContactoService {
+  private httpClient = inject(HttpClient);
+
   selectedContacto: Contacto;
   contactos: Contacto[];
   readonly URL_API = "http://localhost:3000/api/contacto";
   
-  constructor(private httpClient: HttpClient) { 
+  constructor() { 
     this.selectedContacto = new Contacto ();
   }
   postPropiedad(contacto:Contacto) {

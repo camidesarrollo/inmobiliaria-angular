@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from "@angular/forms";
-import { Contacto } from 'src/app/Model/contacto';
+import { Component, OnInit, inject } from '@angular/core';
+import { NgForm, FormsModule } from "@angular/forms";
+import { Contacto } from '../../../Model/contacto';
 import {ContactoService} from '../../../Servicios/contacto.service';
 @Component({
-  selector: 'app-contacto',
-  templateUrl: './contacto.component.html',
-  styleUrls: ['./contacto.component.css']
+    selector: 'app-contacto',
+    templateUrl: './contacto.component.html',
+    styleUrls: ['./contacto.component.css'],
+    imports: [FormsModule]
 })
 export class ContactoComponent implements OnInit {
+  contactoService = inject(ContactoService);
 
-  constructor(public contactoService: ContactoService) { }
 
   ngOnInit(): void {
   }

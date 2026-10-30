@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Propiedades } from 'src/app/Model/propiedades';
+import { Component, OnInit, inject } from '@angular/core';
+import { Propiedades } from '../../../Model/propiedades';
 import {PropiedadesService} from '../../../Servicios/propiedades.service';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-index-anuncio',
-  templateUrl: './index-anuncio.component.html',
-  styleUrls: ['./index-anuncio.component.css'],
+    selector: 'app-index-anuncio',
+    templateUrl: './index-anuncio.component.html',
+    styleUrls: ['./index-anuncio.component.css'],
+    imports: [RouterLink],
 })
 export class IndexAnuncioComponent implements OnInit {
+  propiedadesService = inject(PropiedadesService);
+
   propiedades: Propiedades[];
-  constructor(public propiedadesService: PropiedadesService) { }
 
   ngOnInit(): void {
     this.getPropiedades(); 

@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Propiedades} from '../Model/propiedades';
 @Injectable({
   providedIn: 'root'
 })
 export class PropiedadesService {
+  private httpClient = inject(HttpClient);
+
 
   selectedPropiedades: Propiedades;
   propiedades: Propiedades[];
   
   readonly URL_API = "http://localhost:3000/api/propiedades";
   
-  constructor(private httpClient: HttpClient) { 
+  constructor() { 
     this.selectedPropiedades = new Propiedades();
   }
   postPropiedad(propiedades: Propiedades) {

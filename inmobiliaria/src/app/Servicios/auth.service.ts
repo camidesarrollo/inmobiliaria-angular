@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../Interfaces/user';
 import {Auth} from '../Model/auth';
@@ -6,14 +6,17 @@ import {JwtResponse} from '../Interfaces/jwt-response';
 import {tap} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
+  private httpClient = inject(HttpClient);
+
   AUTH_SERVER: string = "http://localhost:3000";
   readonly URL_API = "http://localhost:3000/api/usuarios";
   authSubject = new BehaviorSubject(false);
   private token: string;
   usuarios: Auth[];
-  constructor(private httpClient: HttpClient) { }
   register(user: User): Observable<JwtResponse>{
     return this.httpClient.post<JwtResponse>(`${this.AUTH_SERVER}/register`,
       user).pipe(tap(
@@ -60,7 +63,7 @@ export class AuthService {
     return this.token;
   }
   loggedIn() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('ACCESS_TOKEN');
   }
 
   getTokenBoolean(): boolean{

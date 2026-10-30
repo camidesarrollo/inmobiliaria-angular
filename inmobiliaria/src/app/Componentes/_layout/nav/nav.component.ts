@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {AuthService} from '../../../Servicios/auth.service';
 import {User} from '../../../Interfaces/user';
-import {Router} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css'],
-  providers: [AuthService]
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.css'],
+    imports: [RouterLink]
 })
 export class NavComponent implements OnInit {
+  authService = inject(AuthService);
+  private router = inject(Router);
+
   validador:boolean;
-  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.validador = this.comprobarAuth();

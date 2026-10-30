@@ -1,4 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 
 import { AdministracionUsuarioComponent } from './administracion-usuario.component';
 
@@ -6,14 +9,13 @@ describe('AdministracionUsuarioComponent', () => {
   let component: AdministracionUsuarioComponent;
   let fixture: ComponentFixture<AdministracionUsuarioComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AdministracionUsuarioComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AdministracionUsuarioComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(AdministracionUsuarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

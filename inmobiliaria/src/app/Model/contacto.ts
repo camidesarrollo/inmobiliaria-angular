@@ -1,5 +1,5 @@
 export class Contacto {
-    contructor(_id = "", nombre= "", email = "", telefono = "", mensaje = "", tipoAccion = "", cantidad = 0, formaDeContacto = "", fecha = "", hora  = "" ){
+    constructor(_id = "", nombre= "", email = "", telefono = "", mensaje = "", tipoAccion = "", cantidad = 0, formaDeContacto = "", fecha = "", hora  = "" ){
         this._id = _id,
         this.nombre = nombre,
         this.email = email,

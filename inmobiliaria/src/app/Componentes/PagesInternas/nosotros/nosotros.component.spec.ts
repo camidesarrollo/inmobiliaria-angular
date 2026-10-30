@@ -1,4 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 
 import { NosotrosComponent } from './nosotros.component';
 
@@ -6,14 +9,13 @@ describe('NosotrosComponent', () => {
   let component: NosotrosComponent;
   let fixture: ComponentFixture<NosotrosComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NosotrosComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [NosotrosComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NosotrosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

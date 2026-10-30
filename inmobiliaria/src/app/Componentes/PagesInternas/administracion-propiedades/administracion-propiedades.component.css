@@ -40,4 +40,16 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}.buscador {
+    width: 100%;
+}
+.tabla-contenedor {
+    overflow-x: auto;
+}
+.tabla-contenedor table {
+    width: 100%;
+}
+.sin-datos {
+    padding: 2rem;
+    text-align: center;
 }

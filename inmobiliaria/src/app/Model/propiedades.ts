@@ -17,19 +17,19 @@ export class Propiedades {
         this.urlPropiedad = urlPropiedad
     }
     _id: string;
-    nombre: String;
-    bano: Number; 
-    pieza: Number;
-    metrosCuadrados: String;
-    ubicacion: String;
-    direccion: String;
-    valor: Number;
-    descripcion:String;
-    recidencia: String;
-    inmobiliaria: String;
-    tipo: String;
-    venta: String;
-    urlPlano: String;
-    urlPropiedad: String;
+    nombre: string;
+    bano: number; 
+    pieza: number;
+    metrosCuadrados: string;
+    ubicacion: string;
+    direccion: string;
+    valor: number;
+    descripcion: string;
+    recidencia: string;
+    inmobiliaria: string;
+    tipo: string;
+    venta: string;
+    urlPlano: string;
+    urlPropiedad: string;
 }
 

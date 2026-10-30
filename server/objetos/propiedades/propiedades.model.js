@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.set('useCreateIndex', true);
 const propiedadesSchema = new Schema({
     nombre:{
         type: String,

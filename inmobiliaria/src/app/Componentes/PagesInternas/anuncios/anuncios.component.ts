@@ -1,19 +1,21 @@
-import { Component,OnDestroy, OnInit } from '@angular/core';
-import { Propiedades } from 'src/app/Model/propiedades';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Propiedades } from '../../../Model/propiedades';
 import {PropiedadesService} from '../../../Servicios/propiedades.service';
+
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
-  selector: 'app-anuncios',
-  templateUrl: './anuncios.component.html',
-  styleUrls: ['./anuncios.component.css'],
-  providers: [PropiedadesService],
+    selector: 'app-anuncios',
+    templateUrl: './anuncios.component.html',
+    styleUrls: ['./anuncios.component.css'],
+    providers: [PropiedadesService],
+    imports: [RouterLink],
 })
 export class AnunciosComponent implements OnDestroy, OnInit {
+  propiedadesService = inject(PropiedadesService);
 
-
-  constructor(public propiedadesService: PropiedadesService) { }
   ngOnDestroy(): void {
   }
 

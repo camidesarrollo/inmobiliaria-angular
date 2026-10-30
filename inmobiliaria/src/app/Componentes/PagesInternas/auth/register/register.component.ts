@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import {AuthService} from '../../../../Servicios/auth.service';
 import {User} from '../../../../Interfaces/user';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
+    imports: [FormsModule, RouterLink]
 })
 export class RegisterComponent implements OnInit {
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
