@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import {AuthService} from '../../../Servicios/auth.service';
 import {User} from '../../../Interfaces/user';
 import { Router, RouterLink } from '@angular/router';
@@ -7,13 +7,17 @@ import { Router, RouterLink } from '@angular/router';
     selector: 'app-nav',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
-    imports: [RouterLink]
+    imports: [RouterLink],
+    host: {
+        '(document:keydown.escape)': 'cerrarMenu()'
+    }
 })
 export class NavComponent implements OnInit {
   authService = inject(AuthService);
   private router = inject(Router);
 
   validador:boolean;
+  menuAbierto = signal(false);
 
   ngOnInit(): void {
     this.validador = this.comprobarAuth();
@@ -24,6 +28,12 @@ export class NavComponent implements OnInit {
     }else{
       return false;
     }
+  }
+  alternarMenu(){
+    this.menuAbierto.update(abierto => !abierto);
+  }
+  cerrarMenu(){
+    this.menuAbierto.set(false);
   }
   cerrarSeccion(){
     this.authService.logout();

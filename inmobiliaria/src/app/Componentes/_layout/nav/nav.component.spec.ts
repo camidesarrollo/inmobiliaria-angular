@@ -24,4 +24,20 @@ describe('NavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('abre y cierra el menú móvil', () => {
+    const el: HTMLElement = fixture.nativeElement;
+    const boton = el.querySelector<HTMLButtonElement>('.menu-toggle')!;
+    const nav = el.querySelector('nav')!;
+
+    expect(nav.classList.contains('abierta')).toBe(false);
+    boton.click();
+    fixture.detectChanges();
+    expect(nav.classList.contains('abierta')).toBe(true);
+    expect(boton.getAttribute('aria-expanded')).toBe('true');
+
+    el.querySelector<HTMLAnchorElement>('nav a')!.click();
+    fixture.detectChanges();
+    expect(nav.classList.contains('abierta')).toBe(false);
+  });
 });

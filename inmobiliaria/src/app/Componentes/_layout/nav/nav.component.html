@@ -1,14 +1,24 @@
-<nav id="navegacion" class="navegacion">
-  <a routerLink="/">Inicio</a>
-  <a routerLink="/nosotros">Nosotros</a>
-  <a routerLink="/anuncios">Anuncios</a>
-  <a routerLink="/blog">Blog</a>
-  <a routerLink="/contacto">Contacto</a>
+<button
+  type="button"
+  class="menu-toggle"
+  aria-controls="navegacion"
+  [attr.aria-expanded]="menuAbierto()"
+  [attr.aria-label]="menuAbierto() ? 'Cerrar menú' : 'Abrir menú'"
+  (click)="alternarMenu()">
+  <img src="assets/Imagenes/barras.svg" alt="">
+</button>
+
+<nav id="navegacion" class="navegacion" [class.abierta]="menuAbierto()">
+  <a routerLink="/" (click)="cerrarMenu()">Inicio</a>
+  <a routerLink="/nosotros" (click)="cerrarMenu()">Nosotros</a>
+  <a routerLink="/anuncios" (click)="cerrarMenu()">Anuncios</a>
+  <a routerLink="/blog" (click)="cerrarMenu()">Blog</a>
+  <a routerLink="/contacto" (click)="cerrarMenu()">Contacto</a>
   @if (validador == false) {
-    <a routerLink="/auth/login">Login</a>
+    <a routerLink="/auth/login" (click)="cerrarMenu()">Login</a>
   }
   @if (validador == true) {
-    <a routerLink="/administrar">Administrador</a>
+    <a routerLink="/administrar" (click)="cerrarMenu()">Administrador</a>
   }
   @if (validador == true) {
     <a (click)="cerrarSeccion()" style="cursor: pointer;">Cerrar Sesion</a>
