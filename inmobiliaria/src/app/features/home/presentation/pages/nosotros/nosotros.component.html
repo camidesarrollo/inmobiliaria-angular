@@ -1,22 +1,188 @@
-<main class="contenedor">
-    <h1 class="fw-300 centrar-texto">Conoce Sobre Nosotros</h1>
+<app-breadcrumb [items]="breadcrumb">
+  <span>Fundada en 2001</span>
+  <span class="size-1.5 rounded-full bg-primary-container" aria-hidden="true"></span>
+  <span>Santiago • Lima • Bogotá</span>
+</app-breadcrumb>
 
-    <div class="contenido-nosotros">
-        <div class="imagen">
-            <img src="../../../../assets/Imagenes/nosotros.jpg" alt="Imagen Sobre Nosotros">
+<!-- Hero editorial: texto (7 col) + fotografía (5 col) -->
+<section class="relative overflow-hidden bg-surface py-space-xl lg:py-space-3xl">
+  <div class="container-luxe grid grid-cols-1 items-center gap-space-xl lg:grid-cols-12 lg:gap-space-2xl">
+    <div class="flex flex-col gap-space-md lg:col-span-7">
+      <app-badge variant="secondary" class="self-start">
+        <app-icon name="verified" [size]="16" class="text-secondary" />
+        Trayectoria &amp; excelencia arquitectónica
+      </app-badge>
+
+      <h1 class="mt-space-xs font-display text-headline-xl-mobile leading-[1.08] tracking-tight text-on-surface md:text-headline-xl lg:text-display-hero">
+        25 años liderando el mercado inmobiliario de <span class="font-normal italic text-secondary">alta gama</span>
+      </h1>
+
+      <p class="mt-space-xs max-w-2xl text-body-lg leading-relaxed text-on-surface-variant">
+        Nacimos con una convicción inquebrantable: las residencias no se miden únicamente en metros cuadrados,
+        sino en la nobleza de su arquitectura, la privacidad de su entorno y la trascendencia del patrimonio que
+        albergan. Curamos piezas inmobiliarias únicas en los enclaves más distinguidos de Chile y Latinoamérica.
+      </p>
+
+      <figure class="mt-space-md flex flex-col gap-space-lg rounded-md bg-white p-space-lg shadow-sm sm:flex-row sm:items-center">
+        <span class="grid size-14 shrink-0 place-items-center rounded-full bg-surface-container text-primary">
+          <app-icon name="compass" [size]="28" />
+        </span>
+        <div class="flex flex-col">
+          <blockquote class="font-display text-headline-sm italic leading-snug text-on-surface">
+            “El verdadero lujo reside en la armonía entre el espacio arquitectónico y la discreción absoluta.”
+          </blockquote>
+          <figcaption class="mt-space-xs flex flex-wrap items-center gap-space-sm">
+            <span class="text-label-caps font-semibold uppercase tracking-wider text-on-surface">Consejo directivo fundador</span>
+            <span class="text-outline-variant" aria-hidden="true">•</span>
+            <span class="text-body-sm text-on-surface-variant">Vitacura</span>
+          </figcaption>
         </div>
-        <div class="texto-nosotros">
-            <blockquote>25 Años de Experiencia</blockquote>
-
-           <p>Inmobiliaria COPE fue fundada el año 2015, con la finalidad de ofrecer servicios de asesoría integral en la gestión y desarrollo de proyectos inmobiliarios de distinta índole.
-            Sus socios Mauricio Núñez Varela y Felipe Apparcel Knoop, ambos reúnen más de 35 años de experiencia acumulado en el rubro inmobiliario y construcción, y que, junto al equipo ejecutivo de la empresa, son el principal activo que permite ofrecer óptimos resultados en sus proyectos.
-            Desde sus inicios a la fecha, la empresa ha crecido sostenida y orgánicamente, manteniendo actualmente una cartera de proyectos que suman más de 90.000 mt2 de construcción, y cuyas ventas superan las UF 3.200.000.
-            </p>
-
-           <p>La exitosa trayectoria en Chile, llevó a Actual Inmobiliaria a cruzar fronteras y, de la mano de socios locales, formar Actual Colombia y Actual Perú, para desarrollar proyectos en ambos países con la experiencia y sello Actual.
-            
-            En Perú, Actual está desarrollando exitosos proyectos en San Miguel, Miraflores y Chorrillos; mientras que en Colombia, Actual diseña y construye importantes proyectos en Bogotá, Tolima y Cundimarca. </p> 
-        </div>
+      </figure>
     </div>
-</main>
-<app-index-nosotros />
+
+    <div class="relative isolate lg:col-span-5">
+      <div class="relative aspect-4/5 overflow-hidden rounded-md bg-surface-container shadow-xl">
+        <img src="assets/Imagenes/nosotros.jpg" alt="Equipo de la inmobiliaria en su sede"
+             class="size-full object-cover transition-transform duration-700 ease-out hover:scale-105" />
+        <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent"></div>
+
+        <app-badge variant="glass" [dot]="true" class="absolute left-space-md top-space-md">
+          Sede Alonso de Córdova • Santiago
+        </app-badge>
+
+        <div class="absolute inset-x-space-md bottom-space-md flex items-center justify-between gap-space-sm rounded-md bg-inverse-surface/85 p-space-md backdrop-blur-lg">
+          <div>
+            <p class="font-display text-headline-sm text-surface-bright">Arquitectura &amp; legado</p>
+            <p class="text-body-sm text-surface-variant">Atención confidencial para patrimonios privados</p>
+          </div>
+          <span class="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-on-primary" aria-hidden="true">
+            <app-icon name="arrow-up-right" [size]="20" />
+          </span>
+        </div>
+      </div>
+      <div class="absolute -bottom-6 -right-6 -z-10 size-32 rounded-full bg-secondary-fixed/40 blur-2xl" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Cifras -->
+<section class="bg-surface-container py-space-2xl" aria-label="Cifras de la empresa">
+  <div class="container-luxe grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-4">
+    @for (s of stats; track s.title) {
+      <app-stat-card [icon]="s.icon" [tone]="s.tone" [tag]="s.tag" [prefix]="s.prefix" [value]="s.value"
+                     [suffix]="s.suffix" [suffixStyle]="s.suffixStyle ?? 'accent'"
+                     [title]="s.title" [description]="s.description" />
+    }
+  </div>
+</section>
+
+<!-- Historia -->
+<section class="bg-surface py-space-3xl">
+  <div class="container-luxe">
+    <app-section-heading
+      class="mx-auto mb-space-2xl max-w-3xl"
+      align="center"
+      [divider]="true"
+      eyebrow="Filosofía institucional"
+      title="El arte de conectar residencias excepcionales con vidas extraordinarias" />
+
+    <div class="grid grid-cols-1 items-start gap-space-xl lg:grid-cols-2 lg:gap-space-2xl">
+      <app-story-chapter number="01" period="Origen & curaduría local (2001–2014)"
+                         title="Custodios del valor arquitectónico en los barrios más exigentes de Chile">
+        <p>
+          Inmobiliaria nació a comienzos de este milenio en Santiago con un propósito singular: redefinir la
+          experiencia del corretaje inmobiliario tradicional transformándolo en una consultoría patrimonial de
+          estándar privado. Comprendimos que propiedades emblemáticas en <strong>Lo Barnechea, San Damián, Santa
+          María de Manquehue, Vitacura y Zapallar</strong> requerían un tratamiento técnico tan riguroso como el de
+          una casa de subastas de arte internacional.
+        </p>
+        <p>
+          Cada residencia en nuestro portafolio es sometida a un escrutinio estético y estructural: orientación
+          solar, nobleza de materiales (mármol travertino, hormigón visto, maderas nativas), privacidad perimetral
+          y coherencia urbanística. No operamos con volumen indiscriminado; seleccionamos únicamente obras con
+          impronta perdurable.
+        </p>
+      </app-story-chapter>
+
+      <app-story-chapter number="02" tone="primary" period="Expansión regional & servicio concierge (2015–hoy)"
+                         title="Presencia transfronteriza y asesoría patrimonial multigeneracional">
+        <p>
+          Durante la última década, los requerimientos de nuestros clientes evolucionaron hacia carteras
+          inmobiliarias diversificadas a lo largo de la Alianza del Pacífico. Establecimos oficinas operativas en
+          <strong>San Isidro (Lima)</strong> y <strong>El Chicó (Bogotá)</strong>, operando bajo un modelo unificado
+          de gobernanza y confidencialidad integral.
+        </p>
+        <p>
+          Nuestro servicio concierge asigna un director patrimonial senior a cada familia inversora, articulando
+          desde due diligence tributario-notarial hasta arquitectura de interiores y custodia legal. Representamos
+          con orgullo a tres generaciones de clientes que confían en nuestro criterio discreto, transparente y libre
+          de conflictos de interés.
+        </p>
+      </app-story-chapter>
+    </div>
+
+    <div class="mt-space-xl grid grid-cols-1 gap-space-md md:grid-cols-3">
+      @for (l of locations; track l.label) {
+        <app-image-tile class="h-64" [image]="l.image" [label]="l.label" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Pilares -->
+<section class="bg-surface-container py-space-3xl">
+  <div class="container-luxe">
+    <div class="mx-auto mb-space-2xl flex max-w-2xl flex-col items-center gap-space-xs text-center">
+      <app-badge variant="secondary">Principios fundacionales</app-badge>
+      <app-section-heading
+        align="center"
+        title="Nuestros pilares de confianza"
+        subtitle="Tres compromisos sin concesiones que han guiado cada transacción privada desde nuestra fundación." />
+    </div>
+
+    <div class="grid grid-cols-1 gap-space-lg md:grid-cols-3">
+      @for (p of pillars; track p.title) {
+        <app-feature-card shape="circle" size="lg" footerIcon="check-circle"
+                          [icon]="p.icon" [iconClass]="p.iconClass" [accentClass]="p.accentClass"
+                          [eyebrow]="p.eyebrow" [title]="p.title" [description]="p.description" [footer]="p.footer" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Equipo -->
+<section class="bg-surface py-space-3xl">
+  <div class="container-luxe">
+    <div class="mb-space-2xl flex flex-col justify-between gap-space-md md:flex-row md:items-end">
+      <app-section-heading
+        class="max-w-2xl"
+        eyebrow="Consejo & liderazgo"
+        title="Directores senior & asesores patrimoniales"
+        subtitle="Profesionales de vasta experiencia en corretaje de lujo, derecho inmobiliario y arquitectura de autor." />
+      <p class="flex items-center gap-space-xs text-body-sm text-on-surface-variant">
+        <app-icon name="shield" class="text-primary" /> Atención estrictamente confidencial
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-space-lg sm:grid-cols-2 lg:grid-cols-4">
+      @for (m of team; track m.email) {
+        <app-team-member-card [member]="m" />
+      }
+    </div>
+  </div>
+</section>
+
+<app-cta-banner
+  size="lg"
+  [image]="null"
+  eyebrow="Mesa privada de inversiones"
+  title="Permítanos asesorar su próxima inversión patrimonial"
+  description="Nuestro equipo de directores senior está a su disposición para coordinar una reunión privada y confidencial en nuestra sede de Vitacura o mediante videollamada."
+  primaryLabel="Agendar reunión privada"
+  primaryIcon="calendar">
+  @for (seal of trustSeals; track seal.label) {
+    <span class="flex items-center gap-space-xs">
+      <app-icon [name]="seal.icon" [size]="16" class="text-primary-fixed" /> {{ seal.label }}
+    </span>
+  }
+</app-cta-banner>

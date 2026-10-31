@@ -79,7 +79,7 @@
     <div class="relative overflow-hidden rounded-lg">
       <img src="assets/Imagenes/header.jpg" alt="" class="absolute inset-0 size-full object-cover" />
       <div class="relative p-space-md md:p-space-2xl">
-        <app-search-console tone="dark" (search)="lastSearch.set($event)" />
+        <app-search-console (search)="lastSearch.set($event)" />
       </div>
     </div>
     @if (lastSearch(); as s) {

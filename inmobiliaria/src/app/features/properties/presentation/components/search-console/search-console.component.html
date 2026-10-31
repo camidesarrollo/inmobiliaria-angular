@@ -1,63 +1,68 @@
-@let dark = tone() === 'dark';
-
 <form role="search" aria-label="Buscar propiedades" (submit)="submit($event)"
-      class="flex flex-col gap-2 rounded-xl p-2 lg:flex-row lg:items-center lg:rounded-full"
-      [class]="dark ? 'glass-panel-dark' : 'glass-panel'">
+      class="rounded-lg bg-white/80 p-space-md text-left shadow-2xl backdrop-blur-2xl">
 
-  <div class="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:divide-x"
-       [class]="dark ? 'divide-white/12' : 'divide-hairline'">
+  <!-- Tipo de propiedad -->
+  <div class="mb-space-md flex items-center gap-space-xs" role="radiogroup" aria-label="Tipo de propiedad">
+    @for (t of tabs(); track t.tipo; let i = $index) {
+      <button type="button" role="radio"
+              class="cursor-pointer rounded-full px-space-lg py-space-xs text-label-md transition-all"
+              [class]="tab() === i ? 'bg-inverse-surface text-surface-bright shadow-sm' : 'bg-transparent text-on-surface-variant hover:text-on-surface'"
+              [attr.aria-checked]="tab() === i"
+              (click)="tab.set(i)">
+        {{ t.label }}
+      </button>
+    }
+    @if (eyebrow()) {
+      <span class="ml-auto hidden text-label-caps uppercase tracking-widest text-secondary sm:inline-block">{{ eyebrow() }}</span>
+    }
+  </div>
 
-    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
-           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
-      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Comuna / Sector</span>
-      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+  <div class="grid grid-cols-1 items-stretch gap-space-sm md:grid-cols-2 lg:grid-cols-4">
+    <label class="flex cursor-pointer flex-col justify-center rounded-md bg-white p-space-sm shadow-sm">
+      <span class="mb-1 flex items-center gap-1 text-label-caps uppercase text-on-surface-variant">
+        <app-icon name="location" [size]="14" class="text-primary" /> Ubicación
+      </span>
+      <select class="w-full cursor-pointer bg-transparent py-0.5 font-display text-headline-sm text-on-surface outline-none"
               (change)="comuna.set(value($event) || null)">
-        <option value="">Todas</option>
+        <option value="">Todas las comunas</option>
         @for (c of comunas(); track c) {
           <option [value]="c">{{ c }}</option>
         }
       </select>
     </label>
 
-    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
-           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
-      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Tipo de propiedad</span>
-      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
-              (change)="tipo.set(value($event) || null)">
-        <option value="">Todos</option>
-        @for (t of tipos(); track t) {
-          <option [value]="t">{{ t }}</option>
+    <label class="flex cursor-pointer flex-col justify-center rounded-md bg-white p-space-sm shadow-sm">
+      <span class="mb-1 flex items-center gap-1 text-label-caps uppercase text-on-surface-variant">
+        <app-icon name="bed" [size]="14" class="text-primary" /> Dormitorios
+      </span>
+      <select class="w-full cursor-pointer bg-transparent py-0.5 font-display text-headline-sm text-on-surface outline-none"
+              (change)="dormitorios.set(value($event) === '' ? null : +value($event))">
+        <option value="">Todas las tipologías</option>
+        @for (d of dormitoriosOpciones; track d) {
+          <option [value]="d">{{ d }}+ dormitorios</option>
         }
       </select>
     </label>
 
-    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
-           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
-      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Rango UF</span>
-      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+    <label class="flex cursor-pointer flex-col justify-center rounded-md bg-white p-space-sm shadow-sm">
+      <span class="mb-1 flex items-center gap-1 text-label-caps uppercase text-on-surface-variant">
+        <app-icon name="trending-up" [size]="14" class="text-secondary" /> Rango de precio
+      </span>
+      <select class="w-full cursor-pointer bg-transparent py-0.5 font-display text-headline-sm text-on-surface outline-none"
               (change)="rango.set(value($event) === '' ? null : +value($event))">
-        <option value="">Cualquiera</option>
+        <option value="">Sin límite</option>
         @for (r of rangosUf(); track r.label; let i = $index) {
           <option [value]="i">{{ r.label }}</option>
         }
       </select>
     </label>
 
-    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
-           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
-      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Dormitorios</span>
-      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
-              (change)="dormitorios.set(value($event) === '' ? null : +value($event))">
-        <option value="">Indiferente</option>
-        @for (d of dormitoriosOpciones; track d) {
-          <option [value]="d">{{ d }}+</option>
-        }
-      </select>
-    </label>
+    <button type="submit"
+            class="flex h-14 w-full cursor-pointer items-center justify-center gap-space-sm self-center rounded-full bg-primary-container
+                   font-display text-headline-sm text-on-primary shadow-md transition-all duration-300
+                   hover:-translate-y-0.5 hover:bg-primary">
+      <app-icon name="search" [size]="20" />
+      Buscar propiedades
+    </button>
   </div>
-
-  <button type="submit" class="btn btn-primary shrink-0 lg:size-14 lg:p-0" aria-label="Buscar">
-    <app-icon name="search" [size]="20" />
-    <span class="lg:sr-only">Buscar</span>
-  </button>
 </form>

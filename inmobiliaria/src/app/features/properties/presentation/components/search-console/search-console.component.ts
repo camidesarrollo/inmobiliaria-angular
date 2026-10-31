@@ -7,6 +7,11 @@ export interface UfRange {
   max: number | null;
 }
 
+export interface SearchTab {
+  label: string;
+  tipo: string;
+}
+
 export interface PropertySearch {
   comuna: string | null;
   tipo: string | null;
@@ -14,16 +19,19 @@ export interface PropertySearch {
   dormitorios: number | null;
 }
 
-export const DEFAULT_COMUNAS = ['Vitacura', 'Lo Barnechea', 'Las Condes', 'Providencia', 'Santiago', 'Zapallar'];
-export const DEFAULT_TIPOS = ['Casa', 'Departamento', 'Penthouse', 'Parcela', 'Oficina'];
+export const DEFAULT_TABS: SearchTab[] = [
+  { label: 'Casas', tipo: 'Casa' },
+  { label: 'Departamentos', tipo: 'Departamento' },
+];
+export const DEFAULT_COMUNAS = ['Vitacura', 'Lo Barnechea', 'Las Condes', 'Providencia', 'Zapallar'];
 export const DEFAULT_RANGOS_UF: UfRange[] = [
-  { label: 'Hasta UF 10.000', min: null, max: 10000 },
-  { label: 'UF 10.000 – 20.000', min: 10000, max: 20000 },
-  { label: 'UF 20.000 – 40.000', min: 20000, max: 40000 },
-  { label: 'Más de UF 40.000', min: 40000, max: null },
+  { label: 'Hasta UF 35.000', min: null, max: 35000 },
+  { label: 'Hasta UF 50.000', min: null, max: 50000 },
+  { label: 'Hasta UF 75.000', min: null, max: 75000 },
+  { label: 'Más de UF 75.000', min: 75000, max: null },
 ];
 
-// Isla flotante de vidrio. tone="dark" cuando va sobre una fotografía (hero).
+// Consola de búsqueda de vidrio: pestañas por tipo + ubicación, dormitorios y rango UF.
 // <app-search-console (search)="buscar($event)" />
 @Component({
   selector: 'app-search-console',
@@ -33,17 +41,17 @@ export const DEFAULT_RANGOS_UF: UfRange[] = [
   host: { class: 'block' },
 })
 export class SearchConsoleComponent {
+  tabs = input(DEFAULT_TABS);
   comunas = input(DEFAULT_COMUNAS);
-  tipos = input(DEFAULT_TIPOS);
   rangosUf = input(DEFAULT_RANGOS_UF);
-  tone = input<'light' | 'dark'>('light');
+  eyebrow = input<string>();
 
   search = output<PropertySearch>();
 
-  protected readonly dormitoriosOpciones = [1, 2, 3, 4, 5];
+  protected readonly dormitoriosOpciones = [2, 3, 4, 5];
 
+  protected tab = signal(0);
   protected comuna = signal<string | null>(null);
-  protected tipo = signal<string | null>(null);
   protected rango = signal<number | null>(null);
   protected dormitorios = signal<number | null>(null);
 
@@ -56,7 +64,7 @@ export class SearchConsoleComponent {
     const rango = this.rango();
     this.search.emit({
       comuna: this.comuna(),
-      tipo: this.tipo(),
+      tipo: this.tabs()[this.tab()]?.tipo ?? null,
       rangoUf: rango === null ? null : this.rangosUf()[rango],
       dormitorios: this.dormitorios(),
     });

@@ -1,0 +1,24 @@
+<section class="relative flex min-h-[calc(100svh-5rem)] items-center justify-center overflow-hidden bg-inverse-surface py-space-2xl lg:min-h-208">
+  <img src="assets/Imagenes/header.jpg" alt="" fetchpriority="high"
+       class="absolute inset-0 size-full object-cover" />
+  <div class="absolute inset-0 bg-linear-to-t from-inverse-surface via-inverse-surface/60 to-inverse-surface/40"></div>
+  <div class="absolute inset-0 bg-radial from-transparent via-transparent to-inverse-surface/70"></div>
+
+  <div class="container-luxe relative z-10 flex flex-col items-center text-center">
+    <p class="mb-space-lg inline-flex items-center gap-space-xs rounded-full bg-white/15 px-space-md py-1.5 shadow-sm backdrop-blur-md">
+      <span class="size-2 animate-pulse rounded-full bg-primary-container"></span>
+      <span class="text-label-caps uppercase tracking-widest text-surface-bright">Colección residencial exclusiva</span>
+    </p>
+
+    <h1 class="mb-space-md max-w-5xl font-display text-display-hero-mobile text-surface-bright drop-shadow-sm md:text-display-hero">
+      Venta de casas y departamentos exclusivos de lujo
+    </h1>
+
+    <p class="mb-space-2xl max-w-2xl text-body-lg font-light text-surface-variant">
+      Descubre residencias excepcionales en las ubicaciones más codiciadas de Chile:
+      Lo Barnechea, Vitacura, Las Condes y Zapallar.
+    </p>
+
+    <app-search-console class="w-full max-w-4xl" eyebrow="Curaduría {{ year }}" (search)="search($event)" />
+  </div>
+</section>

@@ -27,6 +27,9 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     @if (subtitle()) {
       <p class="max-w-2xl text-body-lg text-muted">{{ subtitle() }}</p>
     }
+    @if (divider()) {
+      <span class="mt-space-sm block h-0.5 w-16 bg-secondary" aria-hidden="true"></span>
+    }
   `,
 })
 export class SectionHeadingComponent {
@@ -35,4 +38,5 @@ export class SectionHeadingComponent {
   subtitle = input<string>();
   level = input<1 | 2 | 3>(2);
   align = input<'left' | 'center'>('left');
+  divider = input(false);
 }

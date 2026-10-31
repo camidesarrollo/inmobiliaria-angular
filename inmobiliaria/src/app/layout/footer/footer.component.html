@@ -1,6 +1,62 @@
-<footer class="site-footer seccion">
-    <div class="contenedor contenedor-footer">
-        <app-nav />
-        <p class="copyright">Todos los Derechos Reservados 2019 &copy; </p>
+<footer class="bg-inverse-surface text-inverse-on-surface">
+  <div class="container-luxe pt-space-3xl pb-space-2xl">
+    <div class="grid grid-cols-1 gap-gutter pb-space-2xl md:grid-cols-2 lg:grid-cols-12 lg:gap-space-xl">
+      <div class="flex flex-col gap-space-md lg:col-span-4">
+        <span class="font-display text-headline-lg tracking-tight text-surface-bright">{{ contact.brand }}</span>
+        <p class="max-w-sm text-body-md text-surface-variant">
+          Curaduría y gestión de residencias de alto estándar en los enclaves más prestigiosos de Chile:
+          Vitacura, Lo Barnechea, Zapallar y cordillera.
+        </p>
+        <span class="badge-luxe self-start bg-secondary-fixed text-on-secondary-fixed">Lujo &amp; exclusividad</span>
+      </div>
+
+      <div class="flex flex-col gap-space-sm lg:col-span-3">
+        <h2 class="mb-space-xs font-display text-headline-sm text-surface-bright">Sede central</h2>
+        <address class="flex flex-col gap-space-sm not-italic text-body-sm text-surface-variant">
+          <span class="flex items-start gap-space-sm">
+            <app-icon name="location" class="text-primary-fixed" />{{ contact.address }}
+          </span>
+          <a [href]="'tel:' + contact.phone" class="flex items-center gap-space-sm transition-colors hover:text-surface-bright">
+            <app-icon name="phone" class="text-primary-fixed" />{{ contact.phone }}
+          </a>
+          <a [href]="'mailto:' + contact.email" class="flex items-center gap-space-sm transition-colors hover:text-surface-bright">
+            <app-icon name="mail" class="text-primary-fixed" />{{ contact.email }}
+          </a>
+        </address>
+      </div>
+
+      <nav aria-label="Pie de página" class="flex flex-col gap-space-sm lg:col-span-2">
+        <h2 class="mb-space-xs font-display text-headline-sm text-surface-bright">Navegación</h2>
+        <ul class="flex flex-col gap-space-xs text-body-sm text-surface-variant">
+          @for (item of navigation; track item.path) {
+            <li><a [routerLink]="item.path" class="transition-colors hover:text-surface-bright">{{ item.label }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      <div class="flex flex-col gap-space-sm lg:col-span-3">
+        <h2 class="mb-space-xs font-display text-headline-sm text-surface-bright">Información legal</h2>
+        <ul class="flex flex-col gap-space-xs text-body-sm text-surface-variant">
+          @for (item of legal; track item) {
+            <li><a routerLink="/contacto" class="transition-colors hover:text-surface-bright">{{ item }}</a></li>
+          }
+        </ul>
+        @if (contact.social.length) {
+          <div class="flex items-center gap-space-sm pt-space-sm">
+            @for (s of contact.social; track s.url) {
+              <a [href]="s.url" target="_blank" rel="noopener" [attr.aria-label]="s.label"
+                 class="grid size-9 place-items-center rounded-full bg-surface-variant/20 text-surface-bright transition-colors hover:bg-surface-variant/30">
+                <app-icon [name]="s.icon" />
+              </a>
+            }
+          </div>
+        }
+      </div>
     </div>
+
+    <div class="flex flex-col items-center justify-between gap-space-sm border-t border-white/10 pt-space-lg text-body-sm text-surface-variant sm:flex-row">
+      <p>© {{ year }} {{ contact.brand }}. Todos los derechos reservados.</p>
+      <p class="text-label-caps uppercase tracking-wider text-surface-variant/80">Santiago • Zapallar • Pucón</p>
+    </div>
+  </div>
 </footer>
