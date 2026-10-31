@@ -1,0 +1,99 @@
+
+/* =========================
+   CONTACTO HOME
+========================= */
+
+.imagen-contacto {
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.50),
+            rgba(0, 0, 0, 0.60)
+        ),
+        url('../../../../../../assets/Imagenes/encuentra.jpg');
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    min-height: 40rem;
+    padding: 5rem 0;
+
+    display: flex;
+    align-items: center;
+}
+
+/* Contenido */
+
+.contenido-contacto {
+    position: relative;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Título */
+
+.contenido-contacto h2 {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+
+    margin: 0 0 2rem;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Descripción */
+
+.contenido-contacto p {
+    font-size: clamp(1.6rem, 2vw, 2rem);
+    line-height: 1.7;
+
+    max-width: 65rem;
+    margin: 0 auto 3rem;
+
+    color: #eeeeee;
+}
+
+/* Botón */
+
+.contenido-contacto .boton {
+    display: inline-block;
+    padding: 1.5rem 3.5rem;
+
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    border-radius: 0.5rem;
+    text-decoration: none;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contenido-contacto .boton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   TABLET Y DESKTOP
+========================= */
+
+@media (min-width: 768px) {
+    .imagen-contacto {
+        min-height: 45rem;
+    }
+
+    .contenido-contacto {
+        text-align: left;
+    }
+
+    .contenido-contacto p {
+        margin-left: 0;
+    }
+}

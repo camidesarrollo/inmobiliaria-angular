@@ -1,0 +1,21 @@
+<dialog
+  #dialog
+  class="m-auto w-[calc(100%-2rem)] rounded-lg border border-hairline bg-white p-0 text-charcoal shadow-modal
+         backdrop:bg-charcoal/45 backdrop:backdrop-blur-sm"
+  [class]="sizeClass()"
+  [attr.aria-label]="title()"
+  (close)="close()"
+  (click)="onDialogClick($event)">
+  <div class="flex items-start justify-between gap-space-md border-b border-hairline px-space-lg py-space-md">
+    <h2 class="font-display text-headline-md">{{ title() }}</h2>
+    <button type="button" class="btn-icon -mr-2 border-transparent" aria-label="Cerrar" (click)="close()">
+      <app-icon name="close" />
+    </button>
+  </div>
+
+  <div class="max-h-[70vh] overflow-y-auto px-space-lg py-space-lg">
+    <ng-content />
+  </div>
+
+  <div class="flex flex-wrap justify-end gap-space-sm border-t border-hairline px-space-lg py-space-md empty:hidden"><ng-content select="[modal-footer]" /></div>
+</dialog>

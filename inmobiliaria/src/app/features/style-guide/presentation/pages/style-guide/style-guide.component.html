@@ -1,0 +1,176 @@
+<main class="container-luxe section-luxe flex flex-col gap-space-3xl">
+
+  <app-section-heading
+    [level]="1"
+    eyebrow="Sistema de diseño"
+    title="Inmobiliaria Editorial Luxe"
+    subtitle="Tokens y componentes reutilizables. Esta página es solo de referencia para el equipo." />
+
+  <!-- Colores -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Color" />
+    <div class="grid grid-cols-2 gap-gutter-mobile md:grid-cols-4 lg:grid-cols-8">
+      @for (c of colors; track c.name) {
+        <div class="flex flex-col gap-2">
+          <div class="aspect-square rounded-lg border border-hairline" [class]="c.className"></div>
+          <span class="text-label-md">{{ c.name }}</span>
+          <span class="text-body-sm text-muted uppercase">{{ c.hex }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Tipografía -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Tipografía" />
+    <div class="flex flex-col gap-space-md">
+      <p class="font-display text-display-hero-mobile md:text-display-hero">San Damián</p>
+      <p class="font-display text-headline-xl-mobile md:text-headline-xl">Zapallar Norte</p>
+      <p class="font-display text-headline-lg-mobile md:text-headline-lg">La Dehesa</p>
+      <p class="font-display text-headline-md">Casa con vista a la cordillera</p>
+      <p class="text-body-lg max-w-2xl">Body large — Plus Jakarta Sans para especificaciones, navegación y cifras.</p>
+      <p class="text-body-md max-w-2xl">Body medium — texto corrido de fichas y descripciones.</p>
+      <p class="text-label-caps uppercase">Label caps · Venta exclusiva</p>
+    </div>
+  </section>
+
+  <!-- Botones -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Botones" />
+    <div class="flex flex-wrap items-center gap-space-md">
+      <button appButton type="button">Agendar visita</button>
+      <button appButton type="button" variant="secondary">Ver propiedades</button>
+      <button appButton type="button" variant="ghost">Conocer más</button>
+      <button appButton type="button" size="sm">Pequeño</button>
+      <button appButton type="button" [loading]="true">Enviando</button>
+      <button appButton type="button" disabled>Deshabilitado</button>
+      <button type="button" class="btn-icon" aria-label="Siguiente"><app-icon name="arrow-right" /></button>
+    </div>
+  </section>
+
+  <!-- Badges y chips -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Badges, chips y specs" />
+    <div class="flex flex-wrap items-center gap-space-sm">
+      <app-badge>Venta exclusiva</app-badge>
+      <app-badge variant="gold-soft">Destacada</app-badge>
+      <app-badge variant="dark">Nuevo</app-badge>
+      <app-status-chip>Entrega inmediata</app-status-chip>
+      <app-status-chip tone="pending">En blanco</app-status-chip>
+      <app-status-chip tone="neutral">Vendida</app-status-chip>
+    </div>
+    <div class="flex flex-wrap items-center gap-space-sm">
+      <app-spec-pill icon="bed" [value]="4" unit="d" label="Dormitorios" />
+      <app-spec-pill icon="bath" [value]="5" unit="b" label="Baños" />
+      <app-spec-pill icon="car" [value]="3" unit="est" label="Estacionamientos" />
+      <app-spec-pill icon="area" [value]="420" unit="m²" label="Superficie" />
+    </div>
+    <div class="flex flex-wrap gap-space-2xl">
+      <app-price [uf]="24500" [clp]="915000000" />
+      <app-price [clp]="1250000000" />
+      <app-price />
+    </div>
+  </section>
+
+  <!-- Buscador -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Consola de búsqueda" />
+    <app-search-console (search)="lastSearch.set($event)" />
+    <div class="relative overflow-hidden rounded-lg">
+      <img src="assets/Imagenes/header.jpg" alt="" class="absolute inset-0 size-full object-cover" />
+      <div class="relative p-space-md md:p-space-2xl">
+        <app-search-console tone="dark" (search)="lastSearch.set($event)" />
+      </div>
+    </div>
+    @if (lastSearch(); as s) {
+      <pre class="overflow-x-auto rounded-base bg-charcoal p-space-md text-body-sm text-canvas">{{ s | json }}</pre>
+    }
+  </section>
+
+  <!-- Tarjetas -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Tarjetas de propiedad" />
+    <div class="grid grid-cols-1 gap-gutter-mobile md:grid-cols-2 md:gap-gutter-tablet lg:grid-cols-3 lg:gap-gutter">
+      @for (p of properties; track p.id) {
+        <app-property-card [property]="p" />
+      }
+      <div class="card-luxe">
+        <app-skeleton class="aspect-4/3 rounded-none" />
+        <div class="flex flex-col gap-3 p-space-lg">
+          <app-skeleton class="h-6 w-3/4" />
+          <app-skeleton class="h-4 w-1/2" />
+          <app-skeleton class="h-8 w-1/3" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formularios -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Formularios" />
+    <form class="grid max-w-3xl grid-cols-1 gap-space-lg md:grid-cols-2" (submit)="$event.preventDefault()">
+      <app-form-field label="Nombre" [required]="true">
+        <input appInput type="text" placeholder="Tu nombre" />
+      </app-form-field>
+      <app-form-field label="Email" error="Ingresa un email válido">
+        <input appInput type="email" value="correo@" aria-invalid="true" />
+      </app-form-field>
+      <app-form-field label="Comuna" hint="Puedes elegir más adelante">
+        <select appInput>
+          <option>Vitacura</option>
+          <option>Lo Barnechea</option>
+          <option>Zapallar</option>
+        </select>
+      </app-form-field>
+      <app-form-field label="Teléfono">
+        <input appInput type="tel" placeholder="+56 9 1234 5678" disabled />
+      </app-form-field>
+      <app-form-field label="Mensaje" class="md:col-span-2">
+        <textarea appInput placeholder="Cuéntanos qué buscas"></textarea>
+      </app-form-field>
+    </form>
+  </section>
+
+  <!-- Tabla y paginación -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Tabla y paginación" />
+    <app-table [columns]="columns" [rows]="rows" caption="Propiedades administradas">
+      <ng-template appTableCell="estado" let-row>
+        <app-status-chip [tone]="row.estado === 'Disponible' ? 'available' : row.estado === 'Reservada' ? 'pending' : 'neutral'">
+          {{ row.estado }}
+        </app-status-chip>
+      </ng-template>
+      <ng-template appTableCell="valor" let-row>
+        <span class="font-semibold tabular-nums">{{ row.valor | clp }}</span>
+      </ng-template>
+    </app-table>
+    <app-table [columns]="columns" [rows]="[]" />
+    <app-pagination [(page)]="page" [totalPages]="12" />
+  </section>
+
+  <!-- Modal y carga -->
+  <section class="flex flex-col gap-space-lg">
+    <app-section-heading [level]="3" title="Modal y carga" />
+    <div class="flex flex-wrap items-center gap-space-lg">
+      <button appButton type="button" variant="secondary" (click)="modalOpen.set(true)">Abrir modal</button>
+      <app-loading size="sm" />
+      <app-loading />
+      <app-loading size="lg" [showLabel]="true" />
+    </div>
+  </section>
+</main>
+
+<app-modal [(open)]="modalOpen" title="Agendar visita">
+  <div class="flex flex-col gap-space-md">
+    <p class="text-body-md text-muted">Un asesor te contactará para coordinar la visita a la propiedad.</p>
+    <app-form-field label="Email">
+      <input appInput type="email" placeholder="correo@ejemplo.cl" />
+    </app-form-field>
+  </div>
+  <div modal-footer>
+    <div class="flex gap-space-sm">
+      <button appButton type="button" variant="ghost" (click)="modalOpen.set(false)">Cancelar</button>
+      <button appButton type="button" (click)="modalOpen.set(false)">Confirmar</button>
+    </div>
+  </div>
+</app-modal>

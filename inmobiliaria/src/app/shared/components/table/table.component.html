@@ -1,0 +1,46 @@
+<div class="overflow-x-auto rounded-lg border border-hairline bg-white">
+  <table class="w-full border-collapse text-body-sm">
+    @if (caption()) {
+      <caption class="sr-only">{{ caption() }}</caption>
+    }
+    <thead class="bg-canvas">
+      <tr>
+        @for (column of columns(); track column.key) {
+          <th scope="col" class="px-space-md py-3 text-label-caps uppercase text-muted whitespace-nowrap"
+              [class]="alignClass(column)">
+            {{ column.header }}
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (loading()) {
+        <tr>
+          <td class="px-space-md py-space-xl text-center" [attr.colspan]="columns().length">
+            <app-loading [showLabel]="true" />
+          </td>
+        </tr>
+      } @else {
+        @for (row of rows(); track $index) {
+          <tr class="border-t border-hairline transition-colors duration-200 hover:bg-canvas/60">
+            @for (column of columns(); track column.key) {
+              <td class="px-space-md py-3 align-middle" [class]="alignClass(column)">
+                @if (cellTemplates().get(column.key); as template) {
+                  <ng-container *ngTemplateOutlet="template; context: { $implicit: row }" />
+                } @else {
+                  {{ value(row, column.key) }}
+                }
+              </td>
+            }
+          </tr>
+        } @empty {
+          <tr>
+            <td class="px-space-md py-space-xl text-center text-muted" [attr.colspan]="columns().length">
+              {{ emptyMessage() }}
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>

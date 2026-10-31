@@ -1,0 +1,115 @@
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    background-color: #333333;
+    padding: 1rem 0 3rem;
+}
+
+.site-header.inicio {
+    position: relative;
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url('../../../assets/Imagenes/header.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    min-height: 65rem;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+
+.contenido-header {
+    height: 100%;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Barra de navegación */
+
+.barra {
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.barra > a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.barra img {
+    width: 20rem;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.barra img:hover {
+    transform: scale(1.04);
+}
+
+/* Título principal */
+
+.contenido-header h1 {
+    color: #ffffff;
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+
+    max-width: 65rem;
+    margin: 0 0 4rem;
+
+    text-wrap: balance;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (min-width: 768px) {
+    .contenido-header {
+        text-align: left;
+    }
+
+    .barra {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .contenido-header h1 {
+        margin-bottom: 5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-header.inicio {
+        min-height: 65rem;
+        height: 100svh;
+    }
+
+    .contenido-header h1 {
+        font-size: clamp(3rem, 8vw, 4rem);
+        padding: 0 1rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .barra img {
+        width: 17rem;
+    }
+}

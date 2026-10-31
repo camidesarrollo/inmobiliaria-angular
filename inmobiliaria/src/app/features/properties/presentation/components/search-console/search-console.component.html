@@ -1,0 +1,63 @@
+@let dark = tone() === 'dark';
+
+<form role="search" aria-label="Buscar propiedades" (submit)="submit($event)"
+      class="flex flex-col gap-2 rounded-xl p-2 lg:flex-row lg:items-center lg:rounded-full"
+      [class]="dark ? 'glass-panel-dark' : 'glass-panel'">
+
+  <div class="grid flex-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:divide-x"
+       [class]="dark ? 'divide-white/12' : 'divide-hairline'">
+
+    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
+           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
+      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Comuna / Sector</span>
+      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+              (change)="comuna.set(value($event) || null)">
+        <option value="">Todas</option>
+        @for (c of comunas(); track c) {
+          <option [value]="c">{{ c }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
+           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
+      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Tipo de propiedad</span>
+      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+              (change)="tipo.set(value($event) || null)">
+        <option value="">Todos</option>
+        @for (t of tipos(); track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
+           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
+      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Rango UF</span>
+      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+              (change)="rango.set(value($event) === '' ? null : +value($event))">
+        <option value="">Cualquiera</option>
+        @for (r of rangosUf(); track r.label; let i = $index) {
+          <option [value]="i">{{ r.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-0.5 rounded-lg px-5 py-2.5 transition-colors cursor-pointer"
+           [class]="dark ? 'hover:bg-white/5' : 'hover:bg-white/60'">
+      <span class="text-label-caps uppercase" [class]="dark ? 'text-canvas/70' : 'text-muted'">Dormitorios</span>
+      <select class="cursor-pointer appearance-none bg-transparent text-body-md font-medium focus:outline-none"
+              (change)="dormitorios.set(value($event) === '' ? null : +value($event))">
+        <option value="">Indiferente</option>
+        @for (d of dormitoriosOpciones; track d) {
+          <option [value]="d">{{ d }}+</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-primary shrink-0 lg:size-14 lg:p-0" aria-label="Buscar">
+    <app-icon name="search" [size]="20" />
+    <span class="lg:sr-only">Buscar</span>
+  </button>
+</form>

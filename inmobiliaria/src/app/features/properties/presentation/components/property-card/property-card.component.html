@@ -1,0 +1,68 @@
+@let p = property();
+
+<article class="card-luxe card-luxe-interactive group h-full">
+  <!-- Imagen 4:3 con zoom suave al pasar el mouse -->
+  <div class="relative aspect-4/3 overflow-hidden bg-hairline">
+    @if (p.image) {
+      <img [src]="p.image" [alt]="p.title" loading="lazy"
+           class="size-full object-cover transition-transform duration-700 ease-luxe group-hover:scale-105" />
+    }
+
+    <div class="absolute left-4 top-4 flex flex-wrap gap-2">
+      @if (p.exclusive) {
+        <app-badge variant="gold">Venta exclusiva</app-badge>
+      }
+      @if (p.tag) {
+        <app-badge variant="glass">{{ p.tag }}</app-badge>
+      }
+    </div>
+
+    <!-- z-10 para quedar sobre el enlace que cubre la tarjeta -->
+    <button type="button"
+            class="absolute right-4 top-4 z-10 grid size-[38px] place-items-center rounded-full cursor-pointer
+                   border border-white/50 bg-white/35 backdrop-blur-md text-charcoal
+                   transition-all duration-300 ease-luxe hover:scale-105 hover:bg-white/70"
+            [class.text-green]="favorite()"
+            [attr.aria-pressed]="favorite()"
+            [attr.aria-label]="favorite() ? 'Quitar de favoritos' : 'Añadir a favoritos'"
+            (click)="toggleFavorite()">
+      <app-icon name="heart" [size]="16" [filled]="favorite()" />
+    </button>
+  </div>
+
+  <div class="flex flex-1 flex-col gap-space-md p-space-lg">
+    @if (p.status) {
+      <app-status-chip class="self-start" [tone]="p.status.tone">{{ p.status.label }}</app-status-chip>
+    }
+
+    <div class="flex flex-col gap-1">
+      <h3 class="font-display text-headline-sm">
+        <!-- Enlace estirado: toda la tarjeta es clickeable -->
+        <a [routerLink]="link()" class="after:absolute after:inset-0 focus-visible:outline-none">{{ p.title }}</a>
+      </h3>
+      @if (p.location) {
+        <p class="flex items-center gap-1.5 text-body-sm text-muted">
+          <app-icon name="location" [size]="14" />
+          {{ p.location }}
+        </p>
+      }
+    </div>
+
+    <app-price [uf]="p.priceUf" [clp]="p.priceClp" />
+
+    <div class="mt-auto grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+      @if (p.bedrooms != null) {
+        <app-spec-pill icon="bed" [value]="p.bedrooms" unit="d" label="Dormitorios" />
+      }
+      @if (p.bathrooms != null) {
+        <app-spec-pill icon="bath" [value]="p.bathrooms" unit="b" label="Baños" />
+      }
+      @if (p.parking != null) {
+        <app-spec-pill icon="car" [value]="p.parking" unit="est" label="Estacionamientos" />
+      }
+      @if (p.area != null) {
+        <app-spec-pill icon="area" [value]="p.area" unit="m²" label="Superficie" />
+      }
+    </div>
+  </div>
+</article>

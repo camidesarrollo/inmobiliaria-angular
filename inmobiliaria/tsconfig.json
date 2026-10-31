@@ -8,7 +8,14 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
-    "strict": false
+    "strict": false,
+    "paths": {
+      "@core/*": ["./src/app/core/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@layout/*": ["./src/app/layout/*"],
+      "@features/*": ["./src/app/features/*"],
+      "@env/*": ["./src/environments/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

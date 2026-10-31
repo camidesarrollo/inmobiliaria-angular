@@ -1,0 +1,33 @@
+@if (totalPages() > 1) {
+  <nav aria-label="Paginación" class="flex items-center justify-center gap-space-sm">
+    <button type="button" class="btn-icon disabled:opacity-40 disabled:pointer-events-none"
+            aria-label="Página anterior" [disabled]="page() === 1" (click)="goTo(page() - 1)">
+      <app-icon name="chevron-left" />
+    </button>
+
+    <ol class="flex items-center gap-1">
+      @for (item of pages(); track $index) {
+        <li>
+          @if (item === 'ellipsis') {
+            <span class="grid size-10 place-items-center text-muted" aria-hidden="true">…</span>
+          } @else {
+            <button type="button"
+                    class="grid size-10 place-items-center rounded-full text-body-sm font-semibold tabular-nums
+                           transition-colors duration-300 ease-luxe cursor-pointer"
+                    [class]="item === page() ? 'bg-green text-white' : 'text-charcoal hover:bg-hairline'"
+                    [attr.aria-current]="item === page() ? 'page' : null"
+                    [attr.aria-label]="'Página ' + item"
+                    (click)="goTo(item)">
+              {{ item }}
+            </button>
+          }
+        </li>
+      }
+    </ol>
+
+    <button type="button" class="btn-icon disabled:opacity-40 disabled:pointer-events-none"
+            aria-label="Página siguiente" [disabled]="page() === totalPages()" (click)="goTo(page() + 1)">
+      <app-icon name="chevron-right" />
+    </button>
+  </nav>
+}
