@@ -25,18 +25,22 @@ const ContactoSchema = new Schema({
         type:Number,
         required: true,
     },
+    sector:{
+        type: String,
+    },
     formaDeContacto:{
         type: String,
         required: true,
     },
+    // Solo se informan cuando el contacto es por teléfono o WhatsApp
     fecha:{
         type: String,
-        required: true,
     },
     hora:{
         type: String,
-        required: true,
     },
+}, {
+    timestamps: true
 })
 module.exports = ContactoSchema;
 

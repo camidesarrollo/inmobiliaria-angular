@@ -1,53 +1,309 @@
-<h1 class="fw-300 centrar-texto">Contacto</h1>
-    <img src="../../../../assets/Imagenes/destacada3.jpg" alt="Imagen Principal" class="imgContenido">
+<app-breadcrumb [items]="breadcrumb">
+  <app-badge variant="secondary">
+    <span class="size-1.5 rounded-full bg-secondary" aria-hidden="true"></span>
+    Atención personalizada y confidencial
+  </app-badge>
+</app-breadcrumb>
 
-    <main class="contenedor seccion contenido-centrado">
-        <h2 class="fw-300 centrar-texto">Llena el formulario de Contacto</h2>
+<section class="relative overflow-hidden bg-surface">
+  <!-- Tonos ambientales decorativos -->
+  <div class="pointer-events-none absolute top-0 right-1/4 -z-10 size-[500px] rounded-full bg-primary/5 blur-[140px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute top-96 left-0 -z-10 size-[420px] rounded-full bg-secondary-container/10 blur-[120px]" aria-hidden="true"></div>
 
-        <form class="contacto" #contactoForm="ngForm" (ngSubmit)="addContacto(contactoForm)"> 
-            <fieldset>
-                <legend>Información Personal</legend>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" placeholder="Tu Nombre" name="nombre" #nombre="ngModel" [(ngModel)]="contactoService.selectedContacto.nombre">
-                <label for="email">E-mail: </label>
-                <input type="email" id="email" placeholder="Tu Correo electrónico" name="email" #email="ngModel" [(ngModel)]="contactoService.selectedContacto.email">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" placeholder="Tu Teléfono" name="telefono" #telefono="ngModel" [(ngModel)]="contactoService.selectedContacto.telefono">
-                <label for="mensaje">Mensaje: </label>
-                <textarea  id="mensaje" name="mensaje" #mensaje="ngModel" [(ngModel)]="contactoService.selectedContacto.mensaje"></textarea>
-            </fieldset>
-            <fieldset>
-                <legend>Información sobre Propiedad</legend>
-                <label for="opciones">Vende o Compra</label>
-                <select id="opciones" name="tipoAccion" #tipoAccion="ngModel" [(ngModel)]="contactoService.selectedContacto.tipoAccion">
-                    <option value="" disabled selected>-- Seleccione --</option>
-                    <option value="Compra">Compra</option>
-                    <option value="Vende">Vende</option>
-                </select>
+  <div class="container-luxe py-space-xl lg:py-space-2xl">
+    <div class="grid grid-cols-1 items-start gap-gutter lg:grid-cols-12 lg:gap-space-xl">
 
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" min="0" max="100" step="5" name="cantidad" #cantidad="ngModel" [(ngModel)]="contactoService.selectedContacto.cantidad">
-            </fieldset>
-            <fieldset>
-                <legend>Contacto</legend>
+      <!-- Columna izquierda: introducción, canales directos y mapa -->
+      <div class="flex flex-col gap-space-xl lg:col-span-5">
+        <div class="flex flex-col gap-space-md">
+          <span class="text-label-caps uppercase tracking-widest text-secondary">Gestión inmobiliaria prime</span>
+          <h1 class="font-display text-display-hero-mobile leading-none tracking-tight text-on-surface md:text-display-hero">
+            Hablemos.
+          </h1>
+          <p class="text-body-lg leading-relaxed text-on-surface-variant">
+            Nuestro equipo de directores y asesores patrimoniales está a su entera disposición para coordinar una
+            sesión privada, presencial o remota, resguardando la más estricta reserva de su patrimonio.
+          </p>
+        </div>
 
-                <p>Como desea ser Contactado:</p>
+        <div class="flex flex-col gap-space-md">
+          <!-- Dirección -->
+          <article class="rounded-md bg-white p-space-lg shadow-card transition-all duration-300 ease-luxe hover:-translate-y-1">
+            <div class="flex items-start gap-space-md">
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-surface-container text-primary">
+                <app-icon name="landmark" [size]="20" />
+              </span>
+              <div class="flex flex-col">
+                <span class="text-label-caps uppercase tracking-wider text-outline">Dirección corporativa</span>
+                <h2 class="mt-0.5 font-display text-headline-sm text-on-surface">{{ contact.office }}</h2>
+                <address class="mt-1 text-body-md not-italic leading-snug text-on-surface-variant">{{ contact.address }}</address>
+              </div>
+            </div>
+          </article>
 
-                <div class="forma-contacto">
-                    <label for="telefono">Teléfono</label>
-                    <input type="radio" name="contacto" value="telefono" id="telefono" name="formaDeContacto" #formaDeContacto="ngModel" [(ngModel)]="contactoService.selectedContacto.formaDeContacto">
+          <!-- Teléfonos -->
+          <article class="rounded-md bg-white p-space-lg shadow-card transition-all duration-300 ease-luxe hover:-translate-y-1">
+            <div class="flex items-start gap-space-md">
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-surface-container text-primary">
+                <app-icon name="phone" [size]="20" />
+              </span>
+              <div class="flex w-full flex-col">
+                <span class="text-label-caps uppercase tracking-wider text-outline">Líneas directas</span>
+                <dl class="mt-2 flex flex-col gap-1.5 text-body-md">
+                  <div class="flex items-center justify-between gap-space-sm">
+                    <dt class="text-on-surface-variant">Mesa central</dt>
+                    <dd><a class="font-semibold text-on-surface transition-colors hover:text-primary" [href]="telefonoHref">{{ contact.phone }}</a></dd>
+                  </div>
+                  <div class="flex items-center justify-between gap-space-sm">
+                    <dt class="flex items-center gap-1 text-on-surface-variant">
+                      <span class="size-1.5 rounded-full bg-primary-container" aria-hidden="true"></span> WhatsApp
+                    </dt>
+                    <dd><a class="font-semibold text-on-surface transition-colors hover:text-primary" [href]="contact.whatsappUrl" target="_blank" rel="noopener noreferrer">{{ contact.whatsapp }}</a></dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </article>
 
-                    <label for="correo">E-mail</label>
-                    <input type="radio" name="contacto" value="correo" id="correo" name="formaDeContacto" #formaDeContacto="ngModel" [(ngModel)]="contactoService.selectedContacto.formaDeContacto">
+          <!-- Horario y email -->
+          <article class="rounded-md bg-white p-space-lg shadow-card transition-all duration-300 ease-luxe hover:-translate-y-1">
+            <div class="flex items-start gap-space-md">
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-surface-container text-primary">
+                <app-icon name="clock" [size]="20" />
+              </span>
+              <div class="flex flex-col">
+                <span class="text-label-caps uppercase tracking-wider text-outline">Disponibilidad &amp; canales</span>
+                <p class="mt-1 text-body-md text-on-surface">
+                  @for (bloque of contact.schedule; track bloque.days) {
+                    <span class="block"><span class="font-semibold">{{ bloque.days }}:</span> {{ bloque.hours }}</span>
+                  }
+                </p>
+                <a class="mt-2 text-body-sm text-outline transition-colors hover:text-primary" [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Confidencialidad -->
+        <div class="flex items-center gap-space-md rounded-md bg-surface-container p-space-md">
+          <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-secondary">
+            <app-icon name="shield" [size]="20" />
+          </span>
+          <div class="flex flex-col">
+            <span class="text-label-caps font-bold uppercase tracking-wider text-secondary">Protocolo de confidencialidad</span>
+            <p class="text-body-sm leading-tight text-on-surface-variant">
+              Confidencialidad patrimonial asegurada en cada etapa de la gestión.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="flex flex-col overflow-hidden rounded-md bg-white shadow-card">
+          <iframe
+            class="h-56 w-full border-0 bg-surface-container"
+            [src]="mapa"
+            [title]="'Mapa de ' + contact.office"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="flex items-center justify-between gap-space-sm p-space-md">
+            <span class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+              <app-icon name="location" [size]="18" class="text-primary" />
+              {{ contact.office }}
+            </span>
+            <a class="inline-flex items-center gap-1.5 rounded-full bg-surface-container px-space-md py-1.5 text-body-sm font-medium text-on-surface transition-colors hover:bg-surface-variant"
+               [href]="contact.mapsUrl" target="_blank" rel="noopener noreferrer">
+              Google Maps / Waze
+              <app-icon name="arrow-up-right" [size]="16" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: formulario -->
+      <div class="lg:col-span-7">
+        <div class="flex flex-col gap-space-xl rounded-md bg-white p-space-lg shadow-ambient md:p-space-xl">
+          <header class="flex flex-col gap-1 border-b border-surface-container pb-space-sm">
+            <span class="text-label-caps uppercase tracking-widest text-secondary">Coordinación exclusiva</span>
+            <h2 class="font-display text-headline-lg-mobile text-on-surface md:text-headline-lg">Solicitud de asesoría patrimonial</h2>
+            <p class="text-body-md text-on-surface-variant">
+              Complete la siguiente pauta para designar de inmediato a su director de cuenta particular.
+            </p>
+          </header>
+
+          @if (estado() === 'enviado') {
+            <div class="flex flex-col gap-space-sm rounded-md bg-surface-container-low p-space-lg text-on-surface" role="status">
+              <div class="flex items-center gap-space-md">
+                <span class="grid size-12 shrink-0 place-items-center rounded-full bg-primary-container text-on-primary">
+                  <app-icon name="check-circle" [size]="26" />
+                </span>
+                <div class="flex flex-col">
+                  <span class="font-display text-headline-sm">Solicitud recibida con éxito</span>
+                  <span class="text-label-caps font-bold uppercase text-secondary">Folio de atención: {{ folio() }}</span>
+                </div>
+              </div>
+              <p class="text-body-md leading-relaxed text-on-surface-variant">
+                Un asesor se contactará con usted en un plazo máximo de <strong>2 horas hábiles</strong>,
+                respetando el canal y la ventana horaria indicados.
+              </p>
+              <div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs text-body-sm text-outline">
+                <button type="button" class="font-semibold text-on-surface hover:underline" (click)="nuevaSolicitud()">Enviar otra solicitud</button>
+                <a class="flex items-center gap-1 font-semibold text-primary hover:underline" [href]="contact.whatsappUrl" target="_blank" rel="noopener noreferrer">
+                  ¿Urgente? Escríbanos por WhatsApp <app-icon name="arrow-up-right" [size]="16" />
+                </a>
+              </div>
+            </div>
+          } @else {
+            <form class="flex flex-col gap-space-xl" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+
+              <!-- 1. Información personal -->
+              <fieldset class="flex flex-col gap-space-md">
+                <legend class="mb-space-md flex items-center gap-2 text-label-caps font-bold uppercase tracking-wider text-on-surface">
+                  <span class="grid size-5 place-items-center rounded-full bg-surface-container text-[10px] font-bold text-primary">1</span>
+                  Información personal
+                </legend>
+                <div class="grid grid-cols-1 gap-space-md md:grid-cols-2">
+                  <app-form-field label="Nombre y apellido" [required]="true" [error]="error('nombre')">
+                    <input appInput type="text" formControlName="nombre" autocomplete="name"
+                           placeholder="Ej. Roberto Edwards Larraín" [attr.aria-invalid]="!!error('nombre')" />
+                  </app-form-field>
+                  <app-form-field label="Email" [required]="true" [error]="error('email')">
+                    <input appInput type="email" formControlName="email" autocomplete="email"
+                           placeholder="r.edwards@directorio.cl" [attr.aria-invalid]="!!error('email')" />
+                  </app-form-field>
+                </div>
+                <app-form-field label="Teléfono móvil / WhatsApp" [required]="true" [error]="error('telefono')">
+                  <span class="relative flex items-center">
+                    <span class="pointer-events-none absolute left-4 text-body-md text-on-surface-variant">+56</span>
+                    <input appInput type="tel" formControlName="telefono" autocomplete="tel-national" class="pl-14"
+                           placeholder="9 8765 4321" [attr.aria-invalid]="!!error('telefono')" />
+                  </span>
+                </app-form-field>
+                <app-form-field label="Requerimiento o especificación particular" [required]="true" [error]="error('mensaje')">
+                  <textarea appInput formControlName="mensaje" rows="3" [attr.aria-invalid]="!!error('mensaje')"
+                            placeholder="Indique características deseadas: vista a la cordillera, arquitectura contemporánea, plazo de adquisición..."></textarea>
+                </app-form-field>
+              </fieldset>
+
+              <!-- 2. Perfil de la operación -->
+              <fieldset class="flex flex-col gap-space-md">
+                <legend class="mb-space-md flex items-center gap-2 text-label-caps font-bold uppercase tracking-wider text-on-surface">
+                  <span class="grid size-5 place-items-center rounded-full bg-surface-container text-[10px] font-bold text-primary">2</span>
+                  Perfil de operación inmobiliaria
+                </legend>
+                <div class="flex flex-col gap-space-sm" role="radiogroup" aria-labelledby="proposito-label">
+                  <span id="proposito-label" class="text-label-md uppercase text-charcoal">Propósito principal</span>
+                  <div class="grid grid-cols-3 rounded-full bg-surface-container p-1 text-body-sm text-on-surface-variant">
+                    @for (operacion of operaciones; track operacion) {
+                      <label class="cursor-pointer rounded-full py-2.5 text-center font-medium transition-all
+                                    has-checked:bg-white has-checked:font-semibold has-checked:text-on-surface has-checked:shadow-sm
+                                    has-focus-visible:ring-2 has-focus-visible:ring-primary-container">
+                        <input type="radio" class="sr-only" formControlName="tipoAccion" [value]="operacion" />
+                        {{ operacion }}
+                      </label>
+                    }
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 gap-space-md md:grid-cols-2">
+                  <app-form-field label="Rango de inversión estimado">
+                    <select appInput formControlName="cantidad">
+                      @for (opcion of presupuestos; track opcion.value) {
+                        <option [ngValue]="opcion.value">{{ opcion.label }}</option>
+                      }
+                    </select>
+                  </app-form-field>
+                  <app-form-field label="Sector o comuna de interés">
+                    <select appInput formControlName="sector">
+                      @for (opcion of sectores; track opcion.value) {
+                        <option [value]="opcion.value">{{ opcion.label }}</option>
+                      }
+                    </select>
+                  </app-form-field>
+                </div>
+              </fieldset>
+
+              <!-- 3. Canal de contacto y horario -->
+              <fieldset class="flex flex-col gap-space-md">
+                <legend class="mb-space-md flex items-center gap-2 text-label-caps font-bold uppercase tracking-wider text-on-surface">
+                  <span class="grid size-5 place-items-center rounded-full bg-surface-container text-[10px] font-bold text-primary">3</span>
+                  Canal de contacto preferido
+                </legend>
+                <div class="grid grid-cols-3 gap-space-sm" role="radiogroup" aria-label="Canal de contacto preferido">
+                  @for (canal of canales; track canal.value) {
+                    <label class="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-md bg-surface-container p-space-sm
+                                  text-body-sm font-medium text-on-surface-variant transition-all md:flex-row md:p-space-md
+                                  has-checked:bg-white has-checked:font-semibold has-checked:text-primary has-checked:shadow-sm
+                                  has-checked:ring-2 has-checked:ring-primary-container has-focus-visible:outline-2 has-focus-visible:outline-green">
+                      <input type="radio" class="sr-only" formControlName="formaDeContacto" [value]="canal.value" />
+                      <app-icon [name]="canal.icon" [size]="18" />
+                      {{ canal.label }}
+                    </label>
+                  }
                 </div>
 
-                <p>Si eligió Teléfono, elija la fecha y la hora</p>
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" #fecha="ngModel" [(ngModel)]="contactoService.selectedContacto.fecha">
+                <div class="flex flex-col gap-space-sm rounded-md bg-surface-container-low p-space-md transition-opacity duration-300"
+                     [class.opacity-40]="!requiereHorario()" [attr.inert]="requiereHorario() ? null : ''">
+                  <div class="flex flex-wrap items-center justify-between gap-space-xs">
+                    <span class="text-label-caps font-bold uppercase tracking-wider text-secondary">Ventana horaria</span>
+                    <span class="text-body-sm text-on-surface-variant">
+                      {{ requiereHorario() ? 'Zona horaria Santiago (GMT-3)' : 'No aplica para contacto por email' }}
+                    </span>
+                  </div>
+                  <div class="grid grid-cols-1 gap-space-md md:grid-cols-2">
+                    <app-form-field label="Fecha preferida">
+                      <input appInput type="date" formControlName="fecha" [min]="fechaMinima" />
+                    </app-form-field>
+                    <app-form-field label="Horario conveniente">
+                      <select appInput formControlName="hora">
+                        @for (horario of horarios; track horario) {
+                          <option [value]="horario">{{ horario }}</option>
+                        }
+                      </select>
+                    </app-form-field>
+                  </div>
+                </div>
+              </fieldset>
 
-                <label for="hora">Hora:</label>
-                <input type="time" id="hora" min="09:00" max="18:00" name="hora" #hora="ngModel" [(ngModel)]="contactoService.selectedContacto.hora">
-            </fieldset>
-            <button class="boton boton-verde">Enviar</button>
-        </form>
-    </main>
+              <div class="flex flex-col gap-space-xs">
+                <label class="flex cursor-pointer items-start gap-space-sm pt-space-xs">
+                  <input type="checkbox" formControlName="acepta" class="mt-1 size-4 shrink-0 cursor-pointer accent-primary" />
+                  <span class="text-body-sm leading-relaxed text-on-surface-variant">
+                    Acepto los términos de confidencialidad y el tratamiento seguro de mi información para la gestión
+                    de mi solicitud.
+                  </span>
+                </label>
+                @if (form.controls.acepta.touched && form.controls.acepta.invalid) {
+                  <p class="text-body-sm text-error" role="alert">Debe aceptar los términos para continuar</p>
+                }
+              </div>
+
+              @if (estado() === 'error') {
+                <p class="rounded-base bg-error-container px-space-md py-space-sm text-body-sm text-on-error-container" role="alert">
+                  No pudimos enviar su solicitud. Intente nuevamente o escríbanos a {{ contact.email }}.
+                </p>
+              }
+
+              <button appButton type="submit" class="group h-14 w-full text-body-lg" [loading]="estado() === 'enviando'">
+                {{ estado() === 'enviando' ? 'Procesando solicitud...' : 'Coordinar con un asesor privado' }}
+                @if (estado() !== 'enviando') {
+                  <app-icon name="arrow-right" [size]="20" class="transition-transform duration-300 group-hover:translate-x-1" />
+                }
+              </button>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Pilares de confianza -->
+    <section class="mt-space-3xl grid grid-cols-1 gap-gutter border-t border-surface-container pt-space-2xl md:grid-cols-3"
+             aria-label="Por qué elegirnos">
+      @for (pilar of pilares; track pilar.title) {
+        <article class="flex flex-col gap-space-xs rounded-md bg-surface-container-low p-space-lg">
+          <span class="text-label-caps font-bold uppercase tracking-wider text-secondary">{{ pilar.eyebrow }}</span>
+          <h3 class="font-display text-headline-sm text-on-surface">{{ pilar.title }}</h3>
+          <p class="text-body-sm text-on-surface-variant">{{ pilar.description }}</p>
+        </article>
+      }
+    </section>
+  </div>
+</section>
